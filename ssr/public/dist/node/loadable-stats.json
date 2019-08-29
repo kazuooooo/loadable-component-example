@@ -2,7 +2,7 @@
   "errors": [],
   "warnings": [],
   "version": "4.32.2",
-  "hash": "e7a8a7353b68d04628f9",
+  "hash": "711b5016ab93baf94707",
   "publicPath": "/dist/node/",
   "outputPath": "/Users/kmatsumoto/loadable-component-example/ssr/public/dist/node",
   "assetsByChunkName": {
@@ -161,7 +161,7 @@
     },
     {
       "name": "main.js",
-      "size": 28956,
+      "size": 30237,
       "chunks": [
         "main"
       ],

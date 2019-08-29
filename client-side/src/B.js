@@ -1,1 +1,4 @@
-export default () => 'B'
+export default () => {
+  console.log("load B");
+  return "B";
+};

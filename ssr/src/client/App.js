@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import loadable from "@loadable/component";
 import "./main.css";
@@ -11,6 +11,7 @@ const E = loadable(() => import("./letters/E"), { ssr: false });
 const X = loadable(props => import(`./letters/${props.letter}`));
 const Sub = loadable(props => import(`./letters/${props.letter}/file`));
 const RootSub = loadable(props => import(`./${props.letter}/file`));
+import { Button } from "mockup-shared-component";
 
 // We keep some references to prevent uglify remove
 A.C = C;
@@ -18,24 +19,31 @@ A.D = D;
 
 const Moment = loadable.lib(() => import("moment"));
 
-const App = () => (
-  <div>
-    <A />
-    <br />
-    <B />
-    <br />
-    <X letter="A" />
-    <br />
-    <X letter="F" />
-    <br />
-    <E />
-    <br />
-    <Sub letter="Z" />
-    <br />
-    <RootSub letter="Y" />
-    <br />
-    <Moment>{moment => moment().format("HH:mm")}</Moment>
-  </div>
-);
+const App = () => {
+  const [show, setShow] = useState(false);
+  return (
+    <div>
+      <A />
+      <br />
+      <B />
+      <Button>hello button</Button>
+      <br />
+      <C />
+      <br />
+      <X letter="C" />
+      <br />
+      <X letter="F" />
+      <br />
+      <button onClick={() => setShow(true)}>show E</button>
+      {show && <E />}
+      <br />
+      <Sub letter="Z" />
+      <br />
+      <RootSub letter="Y" />
+      <br />
+      <Moment>{moment => moment().format("HH:mm")}</Moment>
+    </div>
+  );
+};
 
 export default App;

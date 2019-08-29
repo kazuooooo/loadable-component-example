@@ -5,13 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _component = _interopRequireDefault(require("@loadable/component"));
 
 require("./main.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const A = (0, _component.default)({
@@ -349,15 +351,20 @@ const Moment = _component.default.lib({
 
 });
 
-const App = () => _react.default.createElement("div", null, _react.default.createElement(A, null), _react.default.createElement("br", null), _react.default.createElement(B, null), _react.default.createElement("br", null), _react.default.createElement(X, {
-  letter: "A"
-}), _react.default.createElement("br", null), _react.default.createElement(X, {
-  letter: "F"
-}), _react.default.createElement("br", null), _react.default.createElement(E, null), _react.default.createElement("br", null), _react.default.createElement(Sub, {
-  letter: "Z"
-}), _react.default.createElement("br", null), _react.default.createElement(RootSub, {
-  letter: "Y"
-}), _react.default.createElement("br", null), _react.default.createElement(Moment, null, moment => moment().format("HH:mm")));
+const App = () => {
+  const [show, setShow] = (0, _react.useState)(false);
+  return _react.default.createElement("div", null, _react.default.createElement(A, null), _react.default.createElement("br", null), _react.default.createElement(B, null), _react.default.createElement("br", null), _react.default.createElement(C, null), _react.default.createElement("br", null), _react.default.createElement(X, {
+    letter: "C"
+  }), _react.default.createElement("br", null), _react.default.createElement(X, {
+    letter: "F"
+  }), _react.default.createElement("br", null), _react.default.createElement("button", {
+    onClick: () => setShow(true)
+  }, "show E"), show && _react.default.createElement(E, null), _react.default.createElement("br", null), _react.default.createElement(Sub, {
+    letter: "Z"
+  }), _react.default.createElement("br", null), _react.default.createElement(RootSub, {
+    letter: "Y"
+  }), _react.default.createElement("br", null), _react.default.createElement(Moment, null, moment => moment().format("HH:mm")));
+};
 
 var _default = App;
 exports.default = _default;

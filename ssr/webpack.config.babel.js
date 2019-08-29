@@ -8,6 +8,7 @@ const production = process.env.NODE_ENV === "production";
 const development =
   !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
+// webpackのconfigを動的に生成している
 const getConfig = target => ({
   name: target,
   mode: development ? "development" : "production",
@@ -46,5 +47,8 @@ const getConfig = target => ({
   },
   plugins: [new LoadablePlugin(), new MiniCssExtractPlugin()]
 });
+
+console.log("webConfig", getConfig("web"));
+console.log("nodeConfig", getConfig("node"));
 
 export default [getConfig("web"), getConfig("node")];

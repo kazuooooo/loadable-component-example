@@ -11,8 +11,9 @@ function isWebpack(caller) {
 module.exports = api => {
   const web = api.caller(isWebTarget);
   const webpack = api.caller(isWebpack);
-
-  return {
+  console.log("web", web);
+  console.log("webpack", webpack);
+  const config = {
     presets: [
       "@babel/preset-react",
       [
@@ -27,4 +28,6 @@ module.exports = api => {
     ],
     plugins: ["@babel/plugin-syntax-dynamic-import", "@loadable/babel-plugin"]
   };
+  console.log("config", config);
+  return config;
 };

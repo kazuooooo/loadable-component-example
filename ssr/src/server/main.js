@@ -39,17 +39,29 @@ const webStats = path.resolve(
 );
 
 app.get("*", (req, res) => {
+  // statsFileからChunkを生成
+  // 基本chunkfileの中身のdiffは同じだが
+  // 
+  // node(SSR用)
   const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats });
+  // サーバーサイドでのrendering
   const { default: App } = nodeExtractor.requireEntrypoint();
 
+  // web(クライアントサイド用)
   const webExtractor = new ChunkExtractor({ statsFile: webStats });
+  // サーバーサイドでレンダリングしたDOMでjsxを作る
   const jsx = webExtractor.collectChunks(<App />);
 
+  const linkTags = webExtractor.getLinkTags();
+  const styleTags = webExtractor.getStyleTags();
+  // クライアントにjsxを渡す。
+  // クライアントではhydrateを使ってサーバーサイドで
+  // 作ったDOMに対してevent handlerをアタッチするのみ
+  // (main-web.js)
   const html = renderToString(jsx);
 
   res.set("content-type", "text/html");
   res.send(`<!DOCTYPE html>
-<html>
 <head>
 ${webExtractor.getLinkTags()}
 ${webExtractor.getStyleTags()}
